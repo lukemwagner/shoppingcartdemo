@@ -138,3 +138,13 @@ C) Create a new cart object that inherits the original and extends its functiona
 
    
 Once implemented and the tests pass, I will commit the changes.
+
+## 7. Fully implement the Master Tests
+
+Finally, I am now ready to fully implements the master test placeholders created at the start of the project to ensure all the defined criteria is met.
+
+Once implemented, and all Master tests pass without issue, I will commit the changes.
+
+I am now confident that the code is fully functional and directly tested against all requirements.
+
+### Happy Coding!

@@ -15,7 +15,20 @@ namespace ShoppingCart.Test
         {
             // Chart containing: 1 bread, 1 butter and 1 milk should total 2.95
 
-            Assert.Fail("Cart should total 2.95");
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,3),
+                    new Buy3Get4thFree(2)
+                }
+            );
+
+            // add products to the cart
+            cart.AddProduct( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1});
+            cart.AddProduct( new CartProduct() { ProductID = 2, ProductName = "Milk", Price = 1.15m, Quantity = 1});
+            cart.AddProduct( new CartProduct() { ProductID = 3, ProductName = "Bread", Price = 1m, Quantity = 1});
+            
+            // Cart should return 2.95
+            Assert.IsTrue(cart.Total() == 2.95m, "Incorrect cart total returned");
 
         }
         [TestMethod]
@@ -23,15 +36,38 @@ namespace ShoppingCart.Test
         {
             // Chart containing: 2 butter and 2 bread should total 3.10
             
-            Assert.Fail("Cart should total 3.10");
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,3),
+                    new Buy3Get4thFree(2)
+                }
+            );
+
+            // add products to the cart
+            cart.AddProduct( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 2});
+            cart.AddProduct( new CartProduct() { ProductID = 3, ProductName = "Bread", Price = 1m, Quantity = 2});
+            
+            // result should return 3.10
+            Assert.IsTrue(cart.Total() == 3.1m, "Incorrect cart total returned");
 
         }
         [TestMethod]
         public void Cart_Total_ReturnsCorrectAmount_Test3()
         {
-            // Chart containing: 4 milk should total 3.45
+            // Chart containing: 4 X milk should total 3.45
             
-            Assert.Fail("Cart should total 3.45");
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,3),
+                    new Buy3Get4thFree(2)
+                }
+            );
+
+            // add products to the cart
+            cart.AddProduct( new CartProduct() { ProductID = 2, ProductName = "Milk", Price = 1.15m, Quantity = 4});
+            
+            // result should return 3.45
+            Assert.IsTrue(cart.Total() == 3.45m, "Incorrect cart total returned");
 
         }
 
@@ -40,7 +76,20 @@ namespace ShoppingCart.Test
         {
             // Chart containing: 2 butter, 1 bread and 8 milk should total 9.00
             
-            Assert.Fail("Cart should total 9.00");
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,3),
+                    new Buy3Get4thFree(2)
+                }
+            );
+
+            // add products to the cart
+            cart.AddProduct( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 2});
+            cart.AddProduct( new CartProduct() { ProductID = 2, ProductName = "Milk", Price = 1.15m, Quantity = 8});
+            cart.AddProduct( new CartProduct() { ProductID = 3, ProductName = "Bread", Price = 1m, Quantity = 1});
+            
+            // result should return 9.00
+            Assert.IsTrue(cart.Total() == 9.0m, "Incorrect cart total returned");
 
         }
 

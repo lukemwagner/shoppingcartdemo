@@ -101,10 +101,40 @@ I will create three tests for a ‘Buy2GetItemHalfPrice’ object that takes a c
 
 The three tests will assert the following criteria:
 
-**Single discount returned** (2 Butter and 1 Bread) – **Discount value £0.50**  
-**Multi discount returned** (5 Butter and 3 Bread) – **Discount value £1.00**  
-**No discount returned** (1 Butter and 1 Bread) – **Discount is null** 
+- **Single discount returned** (2 Butter and 1 Bread) – **Discount value £0.50**  
+- **Multi discount returned** (5 Butter and 3 Bread) – **Discount value £1.00**  
+- **No discount returned** (1 Butter and 1 Bread) – **Discount is null** 
 
 The code will be implemented and submitted to the repo.
 
 I will now repeat same test and create process for the ‘Buy3Get4thFree’ offer and commit the changes.
+
+## 6. Wrapping it together
+
+Now I need to some kind of container to hold all available offers and method of applying them to the cart and retuning a new total with the discounts applied.
+
+These are my initial thoughts:
+
+A) Modify the existing cart class to take a list of available offers in the constructor and return a new total.
+
+> This would not be a good idea as it would introduce breaking changes to existing code and is not in-line with SOLID principals.
+
+B) Create an entirely new ‘Offers’ object that links to the existing cart and calculates the discounts.
+
+> This is acceptable, but I would prefer the offers to be handled in the cart itself for a cleaner, leaner design.
+
+C) Create a new cart object that inherits the original and extends its functionality to cover the offer requirements.
+
+> This is a logical fit as it does not break existing code and gives a cleaner fit to the requirements.
+
+
+ I will now create the following tests to assert that the new cart class implements the new functionality:
+
+- Confirm that a list of available offers can be passed to the constructor and retrieved though a property called ‘CurrentOffer’.
+
+- Assert that after products that meet an offer requirement are added to the cart, a function called ‘AppliedDiscounts’ can be called to list all applied discounts.
+
+- Asset that a new function called ‘Total’ can apply a sum of all discounts to the base class ‘SubTotal’.
+
+   
+Once implemented and the tests pass, I will commit the changes.

@@ -232,6 +232,69 @@ namespace ShoppingCart.Test
 
         }
 
+        [TestMethod]
+        public void Cart_ShouldAddOffers()
+        {
+            // Cart should accept a accept a list of offers in the constructor and be retrivable.
+
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,2),
+                    new Buy3Get4thFree(1)
+                }
+            );
+
+            var result = cart.CurrentOffers.Count();
+
+            Assert.IsTrue(result == 2, "Offers not added to cart");
+
+        }
+
+        [TestMethod]
+        public void Cart_AppliedOfferShouldReturn()
+        {
+            // Cart should return a list of applied offers
+
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,2),
+                    new Buy3Get4thFree(1)
+                }
+            );
+
+            // add products to meet the criteria of the Buy3Get4thFree offer
+            cart.AddProduct( new CartProduct() { ProductID = 1, ProductName = "Milk", Price = 1.15m, Quantity = 4});
+
+            var result = cart.AppliedDiscounts().FirstOrDefault();
+
+            var offerName = result != null ? result.DiscountConfig.DiscountName : string.Empty;
+
+            Assert.IsTrue(offerName == "Buy 3 get get the 4th free", "No or incorrect offer returned");
+
+        }
+
+        [TestMethod]
+        public void Cart_ShouldReturnTotal_WithDiscountApplied()
+        {
+            // Cart should return a list of applied offers
+
+            IOffersShoppingCart cart = new ShoppingCartOffers(
+                new List<IDiscountConfig>() {
+                    new Buy2GetItemHalfPrice(1,2),
+                    new Buy3Get4thFree(1)
+                }
+            );
+
+            // add products to meet the criteria of the Buy3Get4thFree offer
+            cart.AddProduct( new CartProduct() { ProductID = 1, ProductName = "Milk", Price = 1.15m, Quantity = 4});
+
+            // result should return 1 milk free - £1.15
+            var result = cart.SubTotal() - cart.Total();
+
+            Assert.IsTrue(result == 1.15m, "Incorrect discount applied to Total");
+
+        }
+
     }
 
 }

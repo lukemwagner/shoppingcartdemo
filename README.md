@@ -85,4 +85,10 @@ An additional test will also be created to check that the quantity is updated if
 
 Test succeeded; code submitted!
 
+## 4. Sub Total
+
+The base cart class will be extended with an additional function to return the subtotal of all items in the cart.
+
+A test will be written to evaluate its success and a new code commit submitted.
+
 

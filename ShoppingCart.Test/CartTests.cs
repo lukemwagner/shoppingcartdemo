@@ -95,8 +95,30 @@ namespace ShoppingCart.Test
             Assert.AreEqual(3, result.Quantity, "Product quantity not updated");
 
         }
+        
+       [TestMethod]
+        public void Cart_ShouldReturnSubTotal()
+        {
+            // Cart should return the correct subtotal
+
+            ICartProduct product1 = new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1};
+            ICartProduct product2 = new CartProduct() { ProductID = 2, ProductName = "Milk", Price = 1.15m, Quantity = 2};
+            ICartProduct product3 = new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1};
+
+            IShoppingCart cart = new ShoppingCartStandard();
+
+            cart.AddProduct(product1);
+            cart.AddProduct(product2);
+            cart.AddProduct(product3);
+
+            var result = cart.SubTotal();
+
+            Assert.AreEqual(3.9m, result, "Cart subtotal incorrect");
+
+        }
+
     }
 
-
+ 
 
 }

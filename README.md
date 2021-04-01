@@ -34,3 +34,23 @@ The initial commit will now be made to the Git repo.
 
 A quick clean-up is done to remove the default class and bootstrap test.
 
+**Now onto the fun stuff!**
+
+## 2. Master Tests
+
+The primary objective is to create a shopping cart to hold a number of products that conform to the given specification of requirements.
+
+In order to meet these requirements, I will adopt a TDD approach and first create the final tests to clearly define the successful alignment to the end goal.  
+
+Initially, these tests will not be fully implemented as there would be too many moving parts for an initial test scope. Their job is act as simple placeholders to ensure the direction of all other tests finally accumulate to their successful implementation.
+
+Long term ‘failing’ tests would not be ideal in a larger project, but as this short exercise it fits my current objective well.
+
+Definition of the master test scenarios:
+
+- **Test 1** (1 bread, 1 butter and 1 milk) **should total £2.95**
+- **Test 2** (2 butter and 2 bread) **should total £3.10**
+- **Test 3** (4 milk) should total £3.45
+- **Test 4** (2 butter, 1 bread and 8 milk) **should total £9.00**
+
+I will create a new test class called ‘CartTests’ and implement these four tests with a simple ‘Assert.Fail’ and commit the changes.

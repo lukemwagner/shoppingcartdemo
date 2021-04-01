@@ -2,7 +2,7 @@
 
 ## Project assumptions:
 
-I will create a .Net Core 5 solution containing a class library and a unity test project.
+I will create a .Net Core 5 solution containing a class library and a Unit test project.
 
 Due to being a small demonstration, the class library will use a single namespace.
 

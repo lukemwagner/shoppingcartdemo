@@ -54,3 +54,15 @@ Definition of the master test scenarios:
 - **Test 4** (2 butter, 1 bread and 8 milk) **should total £9.00**
 
 I will create a new test class called ‘CartTests’ and implement these four tests with a simple ‘Assert.Fail’ and commit the changes.
+
+## 2.  Products Model
+
+Before creating the shopping cart, we must first have some products.
+
+In the real world, products would naturally be stored in a persistent datastore and be modelled in code as a simple property-based class that is easily serialised for transportation.
+
+First, I will create a test that requires three products to be added to a generic list of <T> where T is the base interface of the product type. The three products (Butter, Milk and Bread) will be constructed using a ‘StandardProduct’ class of the base interface.
+
+As there are no functions to evaluate or a DBContext to mock, this test will be very simple and only evaluate the successful construction of a list of products.
+
+Once the test is written, I will create the ‘IProduct’ interface and class to allow the test to compile.

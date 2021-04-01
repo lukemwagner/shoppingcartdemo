@@ -91,4 +91,19 @@ The base cart class will be extended with an additional function to return the s
 
 A test will be written to evaluate its success and a new code commit submitted.
 
+## 5. Offers
+
+Offers should be flexible with the ability to create multiple instances from a common interface e.g. Buy-one-get-one-half-price, Buy-one-get-one-free etc.
+
+The offers should also be generic and not hard coded to the product to promote re-use and allow configuration to be persisted in a data store. The target products should therefore be passed in as a parameter to the constructor.
+
+I will create three tests for a ‘Buy2GetItemHalfPrice’ object that takes a cart product list as a parameter and returns a ‘DiscountApplied’ object containing the value of the discount.
+
+The three tests will assert the following criteria:
+
+**Single discount returned** (2 Butter and 1 Bread) – **Discount value £0.50**  
+**Multi discount returned** (5 Butter and 3 Bread) – **Discount value £1.00**  
+**No discount returned** (1 Butter and 1 Bread) – **Discount is null** 
+
+The code will be implemented and submitted to the repo.
 

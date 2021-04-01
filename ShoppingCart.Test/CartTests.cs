@@ -95,7 +95,7 @@ namespace ShoppingCart.Test
             Assert.AreEqual(3, result.Quantity, "Product quantity not updated");
 
         }
-        
+
        [TestMethod]
         public void Cart_ShouldReturnSubTotal()
         {
@@ -114,6 +114,65 @@ namespace ShoppingCart.Test
             var result = cart.SubTotal();
 
             Assert.AreEqual(3.9m, result, "Cart subtotal incorrect");
+
+        }
+
+        [TestMethod]
+        public void Discount_Buy2GetItemHalfPrice_ShouldReturnSingleDiscount()
+        {
+            // Discount should return half price bread (£0.50) if there are 2 butter in the cart
+
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 2});
+            productList.Add( new CartProduct() { ProductID = 2, ProductName = "Bread", Price = 1m, Quantity = 1});
+            
+            // create discount object by passing the product ID's to which it applies
+            IDiscountConfig offer  = new Buy2GetItemHalfPrice(1,2);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            var result = discount != null ? discount.DiscountValue : 0;
+
+            Assert.AreEqual(0.5m, result, "Discount returned incorrect value");
+
+        }
+
+        [TestMethod]
+        public void Discount_Buy2GetItemHalfPrice_ShouldReturnMultiDiscount()
+        {
+            // Discount should return half price bread X 2 (£1) if there are 4 X butter in the cart
+
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 5});
+            productList.Add( new CartProduct() { ProductID = 2, ProductName = "Bread", Price = 1m, Quantity = 3});
+            
+            // create discount object by passing the product ID's to which it applies
+            IDiscountConfig offer  = new Buy2GetItemHalfPrice(1,2);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            var result = discount != null ? discount.DiscountValue : 0;
+            
+            Assert.AreEqual(1m, result, "Discount returned incorrect value");
+
+        }
+
+        [TestMethod]
+        public void Discount_Buy2GetItemHalfPrice_ShouldReturnNoDiscount()
+        {
+            // Discount should return null if the product list does not meet the offer requirements
+
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1});
+            productList.Add( new CartProduct() { ProductID = 2, ProductName = "Bread", Price = 1m, Quantity = 1});
+            
+            // create discount object by passing the product ID's to which it applies
+            IDiscountConfig offer  = new Buy2GetItemHalfPrice(1,2);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            
+            Assert.AreSame(null, discount, "Discount should not return a value");
 
         }
 

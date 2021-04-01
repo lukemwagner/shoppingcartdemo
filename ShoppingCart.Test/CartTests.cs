@@ -176,8 +176,62 @@ namespace ShoppingCart.Test
 
         }
 
-    }
+        [TestMethod]
+        public void Discount_Buy3Get4thFree_ShouldReturnSingleDiscount()
+        {
+            // Discount should 1 free item if 4 are purchased
 
- 
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Milk", Price = 1.15m, Quantity = 4});
+            
+            // create discount object by passing the product ID to which it applies
+            IDiscountConfig offer = new Buy3Get4thFree(1);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            var result = discount != null ? discount.DiscountValue : 0;
+
+            Assert.AreEqual(1.15m, result, "Discount returned incorrect value");
+
+        }
+
+        [TestMethod]
+        public void Discount_Buy3Get4thFree_ShouldReturnMultiDiscount()
+        {
+            // Offer should return multiple discounts if the cart matches the criteria
+
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Milk", Price = 1.15m, Quantity = 10});
+            
+            // create discount object by passing the product ID's to which it applies
+            IDiscountConfig offer = new Buy3Get4thFree(1);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            var result = discount != null ? discount.DiscountValue : 0;
+            
+            Assert.AreEqual(2.3m, result, "Discount returned incorrect value");
+
+        }
+
+        [TestMethod]
+        public void Discount_Buy3Get4thFree_ShouldReturnNoDiscount()
+        {
+            // Discount should return null if the product list does not meet the offer requirements
+
+            var productList = new List<ICartProduct>();
+
+            productList.Add( new CartProduct() { ProductID = 1, ProductName = "Milk", Price = 1.15m, Quantity = 3});
+            
+            // create discount object by passing the product ID's to which it applies
+            IDiscountConfig offer = new Buy3Get4thFree(1);
+
+            IDiscountApplied discount = offer.ApplyDiscount(productList);
+            
+            Assert.AreSame(null, discount, "Discount should not return a value");
+
+        }
+
+    }
 
 }

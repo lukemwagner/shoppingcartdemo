@@ -107,3 +107,4 @@ The three tests will assert the following criteria:
 
 The code will be implemented and submitted to the repo.
 
+I will now repeat same test and create process for the ‘Buy3Get4thFree’ offer and commit the changes.

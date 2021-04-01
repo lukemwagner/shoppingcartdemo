@@ -147,4 +147,6 @@ Once implemented, and all Master tests pass without issue, I will commit the cha
 
 I am now confident that the code is fully functional and directly tested against all requirements.
 
+> Testing code coverage is high and no previously passing test required refactoring as there were no breaking changes during the project.
+
 ### Happy Coding!

@@ -66,3 +66,23 @@ First, I will create a test that requires three products to be added to a generi
 As there are no functions to evaluate or a DBContext to mock, this test will be very simple and only evaluate the successful construction of a list of products.
 
 Once the test is written, I will create the ‘IProduct’ interface and class to allow the test to compile.
+
+Test succeeded.
+
+Code submitted!
+
+## 3. Shopping Cart
+
+I will write a test that creates an instance of a ‘ShoppingCart’ class that has a function to add a product and another function to retrieve all added products.
+
+The test will succeed if a product can be successfully added and retrieved from the cart.
+
+The Shopping cart will be based on an interface with two functions, ‘AddProduct’, which accepts an ‘ICartProduct’ as its parameter and ‘GetCartProducts’ which returns the list of ‘ICartProduct’.
+
+ ‘ICartProduct’ is an extension of ‘IProduct’ that adds a unit quantity to handle multiple quantity purchases.
+
+An additional test will also be created to check that the quantity is updated if the same product is submitted multiple times.
+
+Test succeeded; code submitted!
+
+

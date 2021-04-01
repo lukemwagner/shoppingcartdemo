@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.Lib;
 
@@ -43,6 +44,7 @@ namespace ShoppingCart.Test
 
         }
 
+        [TestMethod]
         public void Products_ShouldCreateProductList()
         {
             // Test the creation of a list of products: Butter, Milk and Bread.
@@ -57,5 +59,44 @@ namespace ShoppingCart.Test
             Assert.IsTrue(productList.Count == 3, "Product List should have 3 products");
 
         }
+
+                [TestMethod]
+        public void Cart_ShouldAddProduct()
+        {
+            // Cart should accept a product and return the product
+
+            ICartProduct product = new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1};
+            
+            IShoppingCart cart = new ShoppingCartStandard();
+
+            cart.AddProduct(product);
+
+            var result = cart.GetCartProducts().FirstOrDefault();
+
+            Assert.AreSame(product, result, "Product not added to cart");
+
+        }
+
+        [TestMethod]
+        public void Cart_ShouldAddProduct_updateQuantity()
+        {
+            // Cart should update the quantity if the same Item is submitted
+
+            ICartProduct product1 = new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 1};
+            ICartProduct product2 = new CartProduct() { ProductID = 1, ProductName = "Butter", Price = 0.8m, Quantity = 2};
+
+            IShoppingCart cart = new ShoppingCartStandard();
+
+            cart.AddProduct(product1);
+            cart.AddProduct(product2);
+
+            var result = cart.GetCartProducts().FirstOrDefault();
+
+            Assert.AreEqual(3, result.Quantity, "Product quantity not updated");
+
+        }
     }
+
+
+
 }

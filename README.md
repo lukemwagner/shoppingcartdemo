@@ -32,3 +32,5 @@ The project complies and the test succeeds without issues.
 
 The initial commit will now be made to the Git repo.
 
+A quick clean-up is done to remove the default class and bootstrap test.
+
